@@ -166,7 +166,7 @@ static void ksu_sys_umount(const char *mnt, int flags)
 #else
 	long ret = sys_umount(usermnt, flags); // cuz asmlinkage long sys##name
 	set_fs(old_fs);
-	pr_info("sys_umount: %s code: %d \n", mnt, ret);
+	pr_info("sys_umount: %s code: %ld \n", mnt, ret);
 #endif
 	return;
 }
@@ -328,7 +328,7 @@ LSM_HANDLER_TYPE ksu_bprm_check(struct linux_binprm *bprm)
 
 // dummy
 #ifndef CONFIG_KSU_LSM_SECURITY_HOOKS
-int ksu_key_permission(key_ref_t key_ref, const struct cred *cred,
+int ksu_key_permission(struct key *key, const struct cred *cred,
 			      unsigned perm)
 {
 	return 0;
