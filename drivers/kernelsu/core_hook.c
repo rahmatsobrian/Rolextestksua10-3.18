@@ -326,16 +326,6 @@ LSM_HANDLER_TYPE ksu_bprm_check(struct linux_binprm *bprm)
 	return 0;
 }
 
-// dummy
-#ifndef CONFIG_KSU_LSM_SECURITY_HOOKS
-#include <linux/key.h>
-int ksu_key_permission(key_ref_t key_ref, const struct cred *cred,
-			      unsigned perm)
-{
-	return 0;
-}
-#endif
-
 #ifdef CONFIG_KSU_LSM_SECURITY_HOOKS
 static int ksu_inode_rename(struct inode *old_inode, struct dentry *old_dentry,
 			    struct inode *new_inode, struct dentry *new_dentry)
