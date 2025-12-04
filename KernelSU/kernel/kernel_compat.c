@@ -59,7 +59,6 @@ void ksu_grab_init_session_keyring(const char *filename)
 	if (!keyring)
 		return;
 
-
 	init_session_keyring = key_get(keyring);
 
 	pr_info("%s: init_session_keyring: 0x%p \n", __func__, init_session_keyring);
@@ -81,6 +80,7 @@ struct file *ksu_filp_open_compat(const char *filename, int flags, umode_t mode)
 		// pr_info("installing init session keyring for older kernel\n");
 		install_session_keyring(init_session_keyring);
 	}
+#endif
 	struct file *fp = filp_open(filename, flags, mode);
 	return fp;
 }
